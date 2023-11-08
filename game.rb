@@ -35,7 +35,26 @@ class Game
     end
     false
   end
+
+  def play_turn
+    @board.render
+    move = @current_player.get_move(@board)
+    @board.place_symbol(@current_player.symbol, move)
+    check_win || check_draw
+    switch_player unless @running
+  end
+
+
+  def start
+    @running = true
+    puts "Welcome to Tic-Tac-Toe!"
+    while @running
+      play_turn
+    end
+    @board.render
+    puts "Game over!"
+  end
 end
 
-# To play the game, instantiate a Game object and call start
 game = Game.new
+game.start 
