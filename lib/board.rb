@@ -11,7 +11,7 @@ class Board
   ].freeze
 
   def initialize
-    @cells = Array.new(9, '')
+    @cells = Array.new(9, ' ')
   end
 
   def render
@@ -23,11 +23,15 @@ class Board
   end
 
   def update_cell(position, symbol)
-    @cells[position] = symbol if valid_move?(position)
+    if valid_move?(position)
+      @cells[position] = symbol
+      return true
+    end
+    false
   end
 
   def valid_move?(position)
-    position.between?(0, 8) && @cells[position] == ' '
+    position.between?(0, 8) && @cells[position] == ' ' 
   end
 
   def full?

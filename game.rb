@@ -39,9 +39,12 @@ class Game
   def play_turn
     @board.render
     move = @current_player.get_move(@board)
-    @board.place_symbol(@current_player.symbol, move)
-    check_win || check_draw
-    switch_player unless @running
+    @board.update_cell(move, @current_player.symbol)
+    if check_win || check_draw
+      @running = false
+      return
+    end
+    switch_player
   end
 
 
