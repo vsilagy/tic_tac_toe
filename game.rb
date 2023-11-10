@@ -47,6 +47,11 @@ class Game
     switch_player
   end
 
+  def restart
+    puts "Restarting game..."
+  initialize
+    start
+  end
 
   def start
     @running = true
@@ -55,7 +60,9 @@ class Game
       play_turn
     end
     @board.render
-    puts "Game over!"
+    puts "Game over! Would you like to play again? (yes/no)"
+    answer = gets.chomp.downcase
+    restart if answer == 'yes'
   end
 end
 
